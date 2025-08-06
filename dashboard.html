@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Google Tag Manager  test-->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W56NWHJ');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard First Media</title>
+            <link rel="stylesheet" href="assets/css/mainbs.css" />
+        <link rel="stylesheet" href="assets/css/swiper.min.css" />
+        <link rel="stylesheet" href="assets/css/Login.css" />
+
+    <link rel="stylesheet" href="https://my.firstmedia.com/chatbot/css/intlTelInput.css" />
+     
+
+    <link rel="icon" href="https://www.firstmedia.com/files/favicon3.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://www.firstmedia.com/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://www.firstmedia.com/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://www.firstmedia.com/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://www.firstmedia.com/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://www.firstmedia.com/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://www.firstmedia.com/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://www.firstmedia.com/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://www.firstmedia.com/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.firstmedia.com/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://www.firstmedia.com/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.firstmedia.com/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://www.firstmedia.com/favicon/manifest.json">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://www.firstmedia.com/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body class="bodylogin">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W56NWHJ"
+            height="0" width="0" style="display: none; visibility: hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <style>
+        .newAdv {
+            margin-top: 1%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+        }
+
+        .adv {
+            width: 52%;
+            border-radius: 15px;
+            background-color: navy;
+            margin: 0 auto;
+        }
+
+        @media screen and (max-width: 480px) {
+            .newAdv {
+                margin-top: 5px;
+                width: 95%
+            }
+
+            .adv {
+                width: 95%
+            }
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-active {
+            background-color: #28a745;
+        }
+
+        .status-inactive {
+            background-color: #dc3545;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+    <a class="newAdv">
+        <div class="adv noauth newdesktop" style="">&nbsp;</div>
+    </a>
+
+    <a class="newAdv">
+        <div class="adv noauth newmobile" style="">&nbsp;</div>
+    </a>
+
+    <div class="allbackground">
+        <section class="login container container-45">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="kontenlogin welcome" style="margin-top: 1%">
+                        <div class="row" style="">
+                            <div class="col-2 text-left">
+                                <a href="#" class="logo">
+                                    <img src="assets/img/logoMYFM_New.png" class="m0auto" alt=""></a>
+                            </div>
+                            <div class="col-10 text-right">
+                                <div class="blokwelcome">
+                                    <h1>Dashboard First Media</h1>
+                                    <p style="margin-bottom: 0px;">Selamat Datang di Dashboard Pelanggan</p>
+                                    <p id="welcomeMessage" style="margin-top: 10px; font-size: 14px; color: #666;"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="assets/img/ilustrasi-cek.png" class="m0auto imgintro" style="margin-bottom: 0em;" alt="">
+                        </div>
+                    </div>
+
+                    <div class="kontenlogin fomridlogin text-center">
+                        <div class="dashboard-card">
+                            <h2>Informasi Akun</h2>
+                            <p class="p-anda" style="font-size: 12px; margin-bottom: 1px !important;">
+                                Nomor Pelanggan: <strong id="accountNumber">Loading...</strong><br>
+                                Nama: <strong id="customerName">Loading...</strong><br>
+                                Status: <span class="status-indicator status-active"></span><strong>AKTIF</strong>
+                            </p>
+                        </div>
+
+                        <div class="dashboard-grid">
+                            <div class="dashboard-card">
+                                <h3>Paket Internet</h3>
+                                <p><strong>First Media 50 Mbps</strong></p>
+                                <p>Status: <span class="status-indicator status-active"></span>Aktif</p>
+                                <p>Tagihan Bulan Ini: <strong>Rp 599.000</strong></p>
+                            </div>
+
+                            <div class="dashboard-card">
+                                <h3>Paket TV</h3>
+                                <p><strong>First Media TV</strong></p>
+                                <p>Status: <span class="status-indicator status-active"></span>Aktif</p>
+                                <p>Jumlah Channel: <strong>100+ Channel</strong></p>
+                            </div>
+
+                            <div class="dashboard-card">
+                                <h3>Paket Telepon</h3>
+                                <p><strong>First Media Phone</strong></p>
+                                <p>Status: <span class="status-indicator status-inactive"></span>Tidak Aktif</p>
+                                <p>Nomor: <strong>-</strong></p>
+                            </div>
+
+                            <div class="dashboard-card">
+                                <h3>Riwayat Tagihan</h3>
+                                <p>Tagihan Terakhir: <strong>Rp 599.000</strong></p>
+                                <p>Jatuh Tempo: <strong>15 Januari 2025</strong></p>
+                                <p>Status: <strong>LUNAS</strong></p>
+                            </div>
+                        </div>
+
+                        <div style="font-family: axiatabook; font-size: 12px; margin-top: 20px;">
+                            <center>
+                                <button class="btn-refresh1 btn btn-isi btn-default" onclick="refreshData()">Refresh Data</button>
+                                <button class="btn-refresh1 btn btn-isi btn-default" onclick="tryAgain()" style="margin: 0 10px;">Coba Lagi</button>
+                                <button class="logout-btn" onclick="logout()">Logout</button>
+                            </center>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </section>
+
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/swiper.min.js"></script>
+        <script>
+           
+            var swiper = new Swiper('.swiper-container', {
+                spaceBetween: 0,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            function updateSlider() {
+                // Removed captcha slider functionality
+            }
+
+            function rebindAdv() {
+                var pname = 'cek.firstmedia.land';
+                var cust = '123456789'; // Default account number
+                var agent = encodeURI(window.navigator.userAgent);
+                var uri = 'https://fm1.firstmedia.com/DPAPWebAds/GenAds.ashx?pname=#p#&acc=#a#&useragent=#ua#&type=3';
+                var uriMobile = 'https://fm1.firstmedia.com/DPAPWebAds/GenAds.ashx?pname=#p#&acc=#a#&useragent=#ua#&type=8';
+                uri = uri.replace("#a#", cust);
+                uri = uri.replace("#ua#", agent);
+
+                uriMobile = uriMobile.replace("#a#", cust);
+                uriMobile = uriMobile.replace("#ua#", agent);
+
+                pname = 'cek.firstmedia.land';
+                uri = uri.replace("#p#", pname);
+                uriMobile = uriMobile.replace("#p#", pname);
+
+                if (cust == undefined || cust == '') {
+                    pname = 'cek.firstmedia.land';
+                    uri = uri.replace("#p#", pname);
+                    uriMobile = uriMobile.replace("#p#", pname);
+
+                } else {
+                    uri = uri.replace("#p#", pname);
+                    uriMobile = uriMobile.replace("#p#", pname);
+
+                }
+                $(".newdesktop").load(uri);
+                $(".newmobile").load(uriMobile);
+            }
+
+            function refreshData() {
+                // Simulate data refresh
+                alert('Data berhasil diperbarui!');
+            }
+
+            function logout() {
+                if (confirm('Apakah Anda yakin ingin logout?')) {
+                    window.location.href = 'Login.html';
+                }
+            }
+
+            function tryAgain() {
+                window.location.href = 'Login.html';
+            }
+
+            $(document).ready(function () {
+                rebindAdv()
+                
+                // Load user input from localStorage
+                var userInput = localStorage.getItem('userInput') || 'default_user';
+                
+                // Update account information
+                $('#accountNumber').text(userInput);
+                $('#customerName').text('Pelanggan ' + userInput);
+                
+                // Update welcome message
+                $('#welcomeMessage').text('Selamat datang, Pelanggan ' + userInput + '!');
+                
+                // Clear localStorage after reading
+                localStorage.removeItem('userInput');
+                
+                $('form').bind("keypress", function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            });
+        </script>
+        
+        <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="https://staging.firstmedia.com:8443/myfm/chatbot/css/indigo.css">
+        <link rel="stylesheet" href="chatbot/css/widget.css">
+        <link rel="stylesheet" href="chatbot/css/lightslider.css">
+        <link rel="stylesheet" href="chatbot/css/intlTelInput.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no" />
+
+        <script src='chatbot/js/jquery-2.1.3.min.js'></script>
+        <script src='chatbot/js/iframeResizer.contentWindow.js'></script>
+        <script src='chatbot/js/iframeResizer.js'></script>
+        <script src='chatbot/js/lightslider.js'></script>
+        <script src='chatbot/js/lazyload.min.js'></script>
+        <script src="chatbot/js/cryptojs/pbkdf2.js"></script>
+        <script src="chatbot/js/cryptojs/aes.js"></script>
+        <script src="chatbot/js/cipher/aes-util.js"></script>
+        <script src="chatbot/js/stp.js"></script>
+        <script src="chatbot/js/sjs.js"></script>
+        <script src="chatbot/js/chat.js"></script>
+        <script src="chatbot/js/fuse.js"></script>
+        <script src="chatbot/js/speech.js"></script>
+        <script src="chatbot/js/intlTelInput.js"></script>
+        <script>
+             $(document).ready(function () {
+             
+             //Chat.init({
+                //    url: "https://firstmedia.3dolphins.ai:5443",
+                //    client_id: "c65c89112c6d322488f0ad79432d7ec5",
+                //    client_secret: "2f0b3b1b1ac4e2544cbe3f2f3ed1efcb",
+                //    member_mode: true,
+                //    member_mode_title: "Kamu pelanggan FirstMedia?",
+                //    option_member: "Ya",
+                //    option_non_member: "Tidak",
+                //    enable_service_hour: false,
+                //    off_hour_message: "Your question or complaint will be emailed to 3dophins@inmotion.co.id",
+                //    selection_topic_placeholder: "Kamu mau bertanya apa?",
+                //    selection_topic_member: ["Layanan"],
+                //    selection_topic_non_member: ["Mau Berlangganan"],
+                //    header: "FITA",
+                //    login_sub_header: "Selamat datang di Virtual Assistant FirstMedia",
+                //    connect_message: " ",
+                //    member_id_placeholder: "Masukkan Nomor Pelanggan",
+                //    name_placeholder: "Masukkan Nama",
+                //    email_placeholder: "Masukkan Email Kamu",
+                //    phone_placeholder: "Masukkan Nomor Telepon",
+                //    chat_sub_header: "Menjawab apapun tentang FirstMedia",
+                //    type_placeholder: "Type message here...",
+                //    triggerMenu: "",
+                //    avatar: "https://firstmedia.3dolphins.ai:8443/webchat-firstmedia/images/logo/Fita-Profile-Picture.png",
+                //    agent_avatar: "https://firstmedia.3dolphins.ai:8443/webchat-firstmedia/images/logo/Fita-Profile-Picture.png",
+                //    icon_avatar: "https://firstmedia.3dolphins.ai:8443/webchat-firstmedia/images/logo/Fita-Floating.png",
+                //    // icon_avatar: "https://staging.firstmedia.com:8443/myfm/images/icon-livechat-fita-myfm-web-opsi blue.png",
+                //    enable_queue: true,
+                //    queue_text: "⏰NOMOR URUT: ",
+                //    enable_campaign: false,
+                //    campaign_timer: 5000,
+                //    campaign_avatar: "https://cdn.3dolphins.ai/widget/images/logo/sri_face.png",
+                //    campaign_title: "Bella",
+                //    campaign_text: "Hello 👋, What do you think about our pricing ?",
+                //    enable_voice: false,
+                //    enable_speech: false,
+                //    gender: "female",
+                //    guestName: "",
+                //    enable_attachment: false,
+                //    enable_history: false,
+                //    number_of_messages: 0,
+                //    quick_reply_flat: false,
+                //    max_upload_message: "File size limit exceeded. Maximum filesize is [max_filesize]",
+                //    uploading_text: "Uploading",
+                //    errorLocationMessage: "",
+                //    enable_attachment: true,
+                //    upload_error_message: "Sorry, media is not supported",
+                //    member_id_input_error_message: "Silahkan Input Salah Satu",
+                //    name_input_error_message: "Masukkan nama dengan benar",
+                //    email_input_error_message: "Masukkan email dengan benar",
+                //    phone_input_error_message: "Masukkan nomor telephone dengan benar",
+                //    member_mode_select_error_message: "Pilih salah satu",
+                //    connect_button_text: "Hubungi FITA"
+                //});
+
+                $('.dolphin-message-logout').remove();
+                $('.dolphin-chat-icon').css({
+                    'font-family': 'axiatabold',
+                    'bottom': 'calc(-8% + 1vw)',
+                    'right': '0%',
+                });
+
+            });
+        </script>
+
+    </div>
+
+</body>
+
+</html> 

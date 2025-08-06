@@ -1,0 +1,502 @@
+﻿.bodylogin {
+    /*background-color: #3b60ae; */
+
+    padding: 0px !important;
+    margin: 0px !important;
+    background-image: url('../img/Background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+/*
+    .bodylogin:before {
+
+    content: " ";
+    background-image: url(assets_new/img/bg-1.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 65px;
+    width: 550px;
+    z-index: -1;
+    background-size: 100%;
+    opacity: .6;
+    }
+
+    .bodylogin:after {
+
+    content: " ";
+    background-image: url(assets_new/img/bg-2.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    height: 230px;
+    width: 335px;
+    z-index: -1;
+    background-size: 100%;
+    opacity: .6;
+    }*/
+
+@media screen and (min-width: 981px) {
+    .newmobile {
+        display: none;
+    }
+}
+
+@media screen /*and (min-width: 480px)*/ and (max-width: 980px) {
+
+    .newdesktop {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .bodylogin:before {
+        background-size: 45%;
+        background-position-y: bottom;
+        width: 80%;
+        height: 200px;
+        bottom: 0;
+    }
+
+    .bodylogin:after {
+        background-size: 50%;
+        background-position-x: right;
+        width: 250px;
+        top: 0px;
+        height: 135px;
+    }
+}
+
+
+
+.bodylogin .login {
+}
+
+    .bodylogin .login .kontenlogin {
+        background-color: #fff;
+    }
+
+    .bodylogin .login .kontenlogin {
+        /* -webkit-box-shadow: 0 0px 60px -10px #1d435e;
+
+    box-shadow: 0 0px 60px -10px #1d435e; */
+    }
+
+        .bodylogin .login .kontenlogin.welcome {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            margin: 2rem 0rem 0rem 0rem;
+            padding: 1rem 2rem 1rem 1rem;
+            overflow: hidden;
+        }
+
+.row > * {
+    padding: 0 0 0 0em !important;
+}
+
+.bodylogin .login .kontenlogin.welcome a img {
+    width: 80%;
+    margin-bottom: 0em;
+}
+
+.bodylogin .login .kontenlogin.welcome h5 {
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    color: #434343;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+
+.bodylogin .login .kontenlogin.welcome h1 {
+    font-size: calc(60% + 1vw);
+    text-transform: capitalize;
+    font-family: 'axiatabold';
+    color: #022DBB;
+    font-weight: normal;
+    letter-spacing: 0.1rem;
+    margin-bottom: 5px;
+}
+
+.bodylogin .login .kontenlogin.welcome p {
+    font-size: calc(15% + 1vw);
+    text-transform: capitalize;
+    font-family: 'axiatabook';
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.bodylogin .login .kontenlogin.fomridlogin {
+    /* -webkit-box-shadow: 0 0px 60px -10px #1d435e;
+
+    box-shadow: 0 0px 60px -10px #1d435e; */
+}
+
+.bodylogin .login .kontenlogin.fomridlogin {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: 0rem 1rem 1rem 1rem;
+    overflow: hidden;
+}
+
+/* input ID ACCOUNT */
+
+.IDaccount {
+    display: grid;
+    grid-template-columns: 2.3rem 4fr 1fr;
+    max-width: 230px;
+    min-width: 180px;
+    background: #f3f2f9;
+    border-radius: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+    .IDaccount:hover,
+    .IDaccount:focus {
+        -webkit-box-shadow: 0 0px 100px -10px #3b60ae;
+        box-shadow: 0 0px 100px -10px #3b60ae;
+    }
+
+    .IDaccount:focus-within i {
+        display: none;
+    }
+
+    .IDaccount:focus-within .IDBox {
+        grid-column: 1/4;
+        border: 2px solid #3b60ae;
+        text-align: center;
+        -webkit-box-shadow: 0 0px 60px -10px #1d435e;
+        box-shadow: 0 0px 60px -10px #1d435e;
+    }
+
+        .IDaccount:focus-within .IDBox::placeholder {
+            color: transparent;
+        }
+
+.IDIcon {
+    padding: 12px 0.5rem 12px 1rem;
+    grid-row: 1;
+    grid-column: 1/2;
+    z-index: 2;
+    font-size: 22px;
+    color: #3b60ae;
+}
+
+.IDBox {
+    border: 0;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    grid-column: 2/4;
+    grid-row: 1;
+    outline: none;
+    background: #f3f2f9;
+    font-family: 'axiatabold';
+    letter-spacing: 2px;
+    color: #3b60ae;
+}
+
+    .IDBox:focus {
+        border: 2px solid #3b60ae;
+        border-radius: 50px;
+        -webkit-box-shadow: 0 0px 60px -10px #1d435e;
+        box-shadow: 0 0px 60px -10px #1d435e;
+    }
+
+input .IDBox:-internal-autofill-selected {
+    background-color: #f3f2f9;
+}
+
+input:-internal-autofill-selected {
+    background-color: #f3f2f9 !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+/* END input ID ACCOUNT */
+
+/* IKLAN LOGIN */
+
+.bodylogin .login .kontenlogin.iklanlogin {
+    margin: 0 auto;
+    width: 100%;
+    height: 90px;
+    margin: 0 auto;
+    /* border-radius: 15px; */
+}
+
+.konteniklanlogin {
+    width: 728px;
+    height: 90px;
+    border-radius: 15px;
+    background-color: navy;
+    margin: 0 auto;
+}
+
+.row {
+    margin: 0 0 0px 0em !important;
+}
+
+/* END IKLAN LOGIN */
+
+@media screen and (max-width: 480px) {
+
+    .row > * {
+        padding: 0 0 0 0em !important;
+    }
+
+    .bodylogin .login .kontenlogin.welcome {
+        margin: 0px 0rem 0px 0rem;
+        padding: 1rem 1rem .8rem 1rem;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        /* border-bottom: 1px solid #bbb; */
+    }
+
+        .bodylogin .login .kontenlogin.welcome h5 {
+            font-size: 0.8rem;
+        }
+
+
+
+        .bodylogin .login .kontenlogin.welcome h1 {
+            font-size: 1rem;
+        }
+
+    .logo {
+        display: inherit;
+        float: left;
+        text-align: left;
+        width: 50px;
+    }
+
+    .blokwelcome {
+        display: inline-block;
+        float: right;
+        text-align: right;
+    }
+
+    .bodylogin .login .kontenlogin.welcome img {
+        width: 100% !important;
+        margin-bottom: 0.4rem !important;
+    }
+
+    .bodylogin .login .kontenlogin.welcome .imgintro {
+        width: 75% !important;
+        display: block;
+        margin-bottom: 0rem !important;
+    }
+
+    .bodylogin .login .kontenlogin.welcome p {
+        font-size: .7rem !important;
+        line-height: normal;
+    }
+
+    .bodylogin .login .kontenlogin.fomridlogin {
+        margin: 0rem 0rem 1.2rem 0rem;
+        border-radius: 35px;
+        padding: .5rem .5rem 1rem .5rem;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 35px;
+        border-bottom-left-radius: 35px;
+        box-shadow: none;
+    }
+
+        .bodylogin .login .kontenlogin.fomridlogin p {
+            font-size: 9px !important;
+            line-height: normal;
+            margin-bottom: 0.8em;
+        }
+
+    img {
+        width: 90%;
+    }
+
+    .bodylogin .login .kontenlogin.iklanlogin {
+        width: 320px;
+        /* display: none; */
+
+        height: 100px;
+    }
+
+    .konteniklanlogin {
+        width: 100%;
+        height: 90px;
+        border-radius: 0px;
+    }
+
+    .kontaineriklan {
+        width: 100%;
+        height: 90px !important;
+        border-radius: 0px !important;
+    }
+
+    .blokgeser {
+        width: 100% !important;
+    }
+
+    .IDIcon {
+        padding: 4px 0.5rem 4px 1rem !important;
+    }
+
+    .IDBox {
+        padding: 0rem 0.5rem 0rem 1rem;
+    }
+
+    .space {
+        width: 90% !important;
+        margin: .8rem auto !important;
+    }
+}
+
+.bodylogin .login .kontenlogin.welcome .imgintro {
+    width: 32%;
+    display: block;
+}
+
+.blokgeser {
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.space {
+    width: 70%;
+    margin: 1rem auto;
+    background-color: #bfbfbf;
+    display: block;
+    padding: 0.5px 0px;
+}
+
+
+.kontaineriklan {
+    height: 90px;
+    /* border-radius: 15px; */
+}
+
+@media screen and (min-width: 780px) {
+
+    .dekstopnone {
+        margin-top: 10px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .dekstopnone {
+        display: none !important;
+    }
+
+    .mobileblock {
+        display: block !important;
+    }
+
+    .container.container-45 {
+        width: 100% !important;
+    }
+
+    .p-anda {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 1680px) {
+
+    .container.container-45 {
+        width: 55%;
+    }
+}
+
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+    right: 0px;
+    left: 20px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    bottom: 5px;
+    width: 10px;
+    height: 10px;
+    background-size: 8px 20px;
+    top: unset;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.swiper-button-next {
+    margin-left: 5px;
+}
+
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+    background-image: none;
+}
+
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+    background-image: none;
+}
+
+.dekstopnone {
+    display: block;
+}
+
+.mobileblock {
+    display: none;
+}
+
+.RegexBox {
+    display: none;
+    height: 5%;
+}
+@media only screen and (min-width: 481px) and (max-width: 580px) {
+    .bodylogin .login .kontenlogin.welcome {
+        padding: 1rem 0.8rem 1rem 1rem;
+    }
+
+        .bodylogin .login .kontenlogin.welcome a img {
+            width: 100%;
+        }
+
+        .bodylogin .login .kontenlogin.welcome h1 {
+            letter-spacing: 0.05rem;
+        }
+
+        .bodylogin .login .kontenlogin.welcome p {
+            font-size: calc(30% + 1vw);
+            text-transform: capitalize;
+            font-family: 'axiatabook';
+            color: #000;
+            margin-bottom: 5px;
+        }
+}
+
+.dolphin-chat-icon {
+    font-family: 'axiatabold';
+    width: 10% !important;
+    min-width:120px;
+    height: 25% !important;
+    min-height:60px;
+    bottom:-7%;
+    right:1%;
+    border-radius: unset !important;
+    background-color: transparent !important;
+    background-size: 110px !important;
+    background-position: center !important;
+    -webkit-box-shadow: unset !important;
+    box-shadow: unset !important;
+    animation: showButtonAnimation 0.5s !important;
+}
+
+.dolphin-chat-title span {
+    font-size: 10px !important;
+}
