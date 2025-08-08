@@ -1,15 +1,16 @@
 {
   "name": "firstmedia-admin",
   "version": "1.0.0",
-  "description": "Admin panel for First Media authentication system",
-  "main": "admin-server.js",
+  "description": "Admin panel for First Media authentication system with SQLite database",
+  "main": "unified-server.js",
   "scripts": {
-    "start": "node admin-server.js",
-    "dev": "nodemon admin-server.js"
+    "start": "node unified-server.js",
+    "dev": "nodemon unified-server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
@@ -18,7 +19,9 @@
     "firstmedia",
     "admin",
     "authentication",
-    "dashboard"
+    "dashboard",
+    "sqlite",
+    "database"
   ],
   "author": "First Media",
   "license": "MIT"

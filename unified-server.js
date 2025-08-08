@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+const db = require('./database');
 
 const app = express();
 const PORT = 3000;
@@ -9,459 +10,635 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.')); // Serve all files from current directory
+app.use(express.static('.'));
 
-// Create data directory if it doesn't exist
+// Ensure data directory exists
 const dataDir = path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir);
+    fs.mkdirSync(dataDir, { recursive: true });
 }
 
-// Store user data
-let userData = [];
+// Initialize database on startup
+db.initDatabase()
+    .then(() => {
+        console.log('✅ Database initialized successfully');
+    })
+    .catch(err => {
+        console.error('❌ Database initialization failed:', err);
+    });
 
-// Routes
+// Root redirect to auth page
 app.get('/', (req, res) => {
     res.redirect('/auth.html');
 });
 
-app.get('/admin', (req, res) => {
-    res.send(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Admin Panel - First Media</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 20px;
-                    background: #f5f5f5;
-                }
-                .container {
-                    max-width: 1200px;
-                    margin: 0 auto;
-                    background: white;
-                    border-radius: 10px;
-                    padding: 20px;
-                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                }
-                h1 {
-                    color: #333;
-                    text-align: center;
-                    margin-bottom: 30px;
-                }
-                .stats {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 20px;
-                    margin-bottom: 30px;
-                }
-                .stat-card {
-                    background: #007bff;
-                    color: white;
-                    padding: 20px;
-                    border-radius: 8px;
-                    text-align: center;
-                }
-                .stat-card h3 {
-                    margin: 0 0 10px 0;
-                    font-size: 24px;
-                }
-                .stat-card p {
-                    margin: 0;
-                    font-size: 14px;
-                }
-                .data-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 20px;
-                }
-                .data-table th,
-                .data-table td {
-                    padding: 12px;
-                    text-align: left;
-                    border-bottom: 1px solid #ddd;
-                }
-                .data-table th {
-                    background: #f8f9fa;
-                    font-weight: bold;
-                }
-                .data-table tr:hover {
-                    background: #f5f5f5;
-                }
-                .btn {
-                    background: #007bff;
-                    color: white;
-                    border: none;
-                    padding: 10px 20px;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin: 5px;
-                }
-                .btn:hover {
-                    background: #0056b3;
-                }
-                .btn-danger {
-                    background: #dc3545;
-                }
-                .btn-danger:hover {
-                    background: #c82333;
-                }
-                .filter-section {
-                    margin-bottom: 20px;
-                    padding: 15px;
-                    background: #f8f9fa;
-                    border-radius: 5px;
-                }
-                .filter-section select,
-                .filter-section input {
-                    padding: 8px;
-                    margin: 5px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                }
-                .export-section {
-                    margin-top: 20px;
-                    text-align: center;
-                }
-                .nav-links {
-                    text-align: center;
-                    margin-bottom: 20px;
-                }
-                .nav-links a {
-                    color: #007bff;
-                    text-decoration: none;
-                    margin: 0 10px;
-                    padding: 8px 16px;
-                    border: 1px solid #007bff;
-                    border-radius: 5px;
-                    transition: all 0.3s ease;
-                }
-                .nav-links a:hover {
-                    background: #007bff;
-                    color: white;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <h1>Admin Panel - First Media</h1>
-                
-                <div class="nav-links">
-                    <a href="/auth.html">Auth Page</a>
-                    <a href="/Login.html">Home Page</a>
-                    <a href="/dashboard.html">Dashboard</a>
-                </div>
-                
-                <div style="background: #e7f3ff; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #007bff;">
-                    <strong>📊 Data Collection Info:</strong> Semua data login dan register termasuk password akan tersimpan di sini. Data dapat diexport ke JSON/CSV.
-                </div>
-                
-                <div class="stats">
-                    <div class="stat-card">
-                        <h3 id="totalUsers">0</h3>
-                        <p>Total Users</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="totalLogins">0</h3>
-                        <p>Total Logins</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="totalRegistrations">0</h3>
-                        <p>Total Registrations</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="totalSocial">0</h3>
-                        <p>Social Logins</p>
-                    </div>
-                </div>
+// Admin panel endpoint
+app.post('/admin', async (req, res) => {
+    try {
+        const data = req.body;
+        console.log('📥 Received data:', data);
+        
+        // Insert data into SQLite database
+        const insertId = await db.insertUserData(data);
+        
+        console.log(`✅ Data inserted with ID: ${insertId}`);
+        res.json({ 
+            success: true, 
+            message: 'Data saved to database',
+            id: insertId 
+        });
+    } catch (error) {
+        console.error('❌ Error saving data:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error saving data',
+            error: error.message 
+        });
+    }
+});
 
-                <div class="filter-section">
-                    <h3>Filter Data</h3>
-                    <select id="typeFilter">
-                        <option value="">All Types</option>
-                        <option value="login">Login</option>
-                        <option value="register">Register</option>
-                        <option value="google_login">Google Login</option>
-                        <option value="facebook_login">Facebook Login</option>
-                        <option value="instagram_login">Instagram Login</option>
-                        <option value="social_login">Social Login</option>
-                        <option value="social_register">Social Register</option>
-                        <option value="forgot_password">Forgot Password</option>
-                    </select>
-                    <input type="text" id="searchInput" placeholder="Search by username, email, name, password, or provider...">
-                    <button class="btn" onclick="filterData()">Filter</button>
-                    <button class="btn" onclick="clearFilter()">Clear</button>
-                </div>
+// Get all data endpoint
+app.get('/api/data', async (req, res) => {
+    try {
+        const data = await db.getAllUserData();
+        res.json(data);
+    } catch (error) {
+        console.error('❌ Error getting data:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error retrieving data',
+            error: error.message 
+        });
+    }
+});
 
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Timestamp</th>
-                            <th>Type</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Password</th>
-                            <th>Provider</th>
-                            <th>User Agent</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dataTableBody">
-                        <!-- Data will be populated here -->
-                    </tbody>
-                </table>
+// Search data endpoint
+app.get('/api/search', async (req, res) => {
+    try {
+        const { q } = req.query;
+        if (!q) {
+            const data = await db.getAllUserData();
+            return res.json(data);
+        }
+        
+        const data = await db.searchUserData(q);
+        res.json(data);
+    } catch (error) {
+        console.error('❌ Error searching data:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error searching data',
+            error: error.message 
+        });
+    }
+});
 
-                <div class="export-section">
-                    <button class="btn" onclick="exportData()">Export to JSON</button>
-                    <button class="btn" onclick="exportCSV()">Export to CSV</button>
-                    <button class="btn btn-danger" onclick="clearAllData()">Clear All Data</button>
-                </div>
+// Filter data by action type
+app.get('/api/filter/:action', async (req, res) => {
+    try {
+        const { action } = req.params;
+        const data = await db.filterUserDataByAction(action);
+        res.json(data);
+    } catch (error) {
+        console.error('❌ Error filtering data:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error filtering data',
+            error: error.message 
+        });
+    }
+});
+
+// Get database statistics
+app.get('/api/stats', async (req, res) => {
+    try {
+        const stats = await db.getDatabaseStats();
+        res.json(stats);
+    } catch (error) {
+        console.error('❌ Error getting stats:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error getting statistics',
+            error: error.message 
+        });
+    }
+});
+
+// Clear all data endpoint
+app.delete('/api/clear', async (req, res) => {
+    try {
+        const deletedCount = await db.clearAllData();
+        res.json({ 
+            success: true, 
+            message: `Cleared ${deletedCount} records`,
+            deletedCount 
+        });
+    } catch (error) {
+        console.error('❌ Error clearing data:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error clearing data',
+            error: error.message 
+        });
+    }
+});
+
+// Admin panel HTML
+app.get('/admin', async (req, res) => {
+    try {
+        const data = await db.getAllUserData();
+        const stats = await db.getDatabaseStats();
+        
+        const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Media Admin Panel - Database</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .info-message {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            border-left: 4px solid #007bff;
+            font-size: 1.1em;
+        }
+        
+        .controls {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .filter-select {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .table-container {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .timestamp {
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .provider-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .provider-google { background: #4285f4; color: white; }
+        .provider-facebook { background: #1877f2; color: white; }
+        .provider-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .provider-regular { background: #6c757d; color: white; }
+        
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .search-container { flex-direction: column; }
+            .search-input { min-width: 100%; }
+            table { font-size: 0.9em; }
+            th, td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 First Media Admin Panel</h1>
+            <p>Database Management System - SQLite</p>
+        </div>
+        
+        <div class="info-message">
+            <strong>📊 Database Info:</strong> Semua data login dan register termasuk password tersimpan di database SQLite. Data dapat dicari, difilter, dan diexport.
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">${stats.total_records || 0}</div>
+                <div class="stat-label">Total Records</div>
             </div>
-
-            <script>
-                let allData = [];
-                let filteredData = [];
-
-                // Load data on page load
-                window.onload = function() {
-                    loadData();
-                };
-
-                function loadData() {
-                    fetch('/api/data')
-                        .then(response => response.json())
-                        .then(data => {
-                            allData = data;
-                            filteredData = data;
-                            updateStats();
-                            renderTable();
-                        })
-                        .catch(error => console.error('Error loading data:', error));
-                }
-
-                function updateStats() {
-                    const totalUsers = allData.length;
-                    const totalLogins = allData.filter(item => item.type === 'login').length;
-                    const totalRegistrations = allData.filter(item => item.type === 'register').length;
-                    const totalSocial = allData.filter(item => 
-                        item.type === 'social_login' || item.type === 'social_register'
-                    ).length;
-
-                    document.getElementById('totalUsers').textContent = totalUsers;
-                    document.getElementById('totalLogins').textContent = totalLogins;
-                    document.getElementById('totalRegistrations').textContent = totalRegistrations;
-                    document.getElementById('totalSocial').textContent = totalSocial;
-                }
-
-                function renderTable() {
-                    const tbody = document.getElementById('dataTableBody');
-                    tbody.innerHTML = '';
-
-                    filteredData.forEach((item, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = \`
-                            <td>\${new Date(item.timestamp).toLocaleString()}</td>
-                            <td>\${item.type}</td>
-                            <td>\${item.data?.username || '-'}</td>
-                            <td>\${item.data?.email || '-'}</td>
-                            <td>\${item.data?.name || '-'}</td>
-                            <td>\${item.data?.phone || '-'}</td>
-                            <td>\${item.data?.password || '-'}</td>
-                            <td>\${item.data?.provider || '-'}</td>
-                            <td>\${item.data?.userAgent ? item.data.userAgent.substring(0, 50) + '...' : '-'}</td>
+            <div class="stat-card">
+                <div class="stat-number">${stats.unique_users || 0}</div>
+                <div class="stat-label">Unique Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${stats.unique_providers || 0}</div>
+                <div class="stat-label">Providers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${stats.unique_actions || 0}</div>
+                <div class="stat-label">Action Types</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by username, email, name, password, or provider...">
+                <select id="filterSelect" class="filter-select">
+                    <option value="">All Actions</option>
+                    <option value="login">Login</option>
+                    <option value="register">Register</option>
+                    <option value="forgot_password">Forgot Password</option>
+                    <option value="google_login">Google Login</option>
+                    <option value="facebook_login">Facebook Login</option>
+                    <option value="instagram_login">Instagram Login</option>
+                </select>
+                <button class="btn btn-primary" onclick="exportToCSV()">📊 Export CSV</button>
+                <button class="btn btn-success" onclick="exportToJSON()">📄 Export JSON</button>
+                <button class="btn btn-danger" onclick="clearAllData()">🗑️ Clear All</button>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Password</th>
+                        <th>Provider</th>
+                        <th>Action</th>
+                        <th>User Agent</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    ${data.length === 0 ? '<tr><td colspan="10" class="no-data">No data available</td></tr>' : 
+                    data.map(item => `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.username || '-'}</td>
+                            <td>${item.email || '-'}</td>
+                            <td>${item.name || '-'}</td>
+                            <td>${item.phone || '-'}</td>
+                            <td>${item.password || '-'}</td>
                             <td>
-                                <button class="btn" onclick="viewDetails(\${index})">View</button>
-                                <button class="btn btn-danger" onclick="deleteItem(\${index})">Delete</button>
+                                ${item.provider ? 
+                                    `<span class="provider-badge provider-${item.provider.toLowerCase()}">${item.provider}</span>` : 
+                                    '<span class="provider-badge provider-regular">Regular</span>'
+                                }
                             </td>
-                        \`;
-                        tbody.appendChild(row);
-                    });
-                }
+                            <td>${item.action_type || '-'}</td>
+                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" title="${item.user_agent || ''}">${item.user_agent || '-'}</td>
+                            <td class="timestamp">${new Date(item.timestamp).toLocaleString()}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-                function filterData() {
-                    const typeFilter = document.getElementById('typeFilter').value;
-                    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-
-                    filteredData = allData.filter(item => {
-                        const matchesType = !typeFilter || item.type === typeFilter;
-                        const matchesSearch = !searchInput || 
-                            (item.data?.username && item.data.username.toLowerCase().includes(searchInput)) ||
-                            (item.data?.email && item.data.email.toLowerCase().includes(searchInput)) ||
-                            (item.data?.name && item.data.name.toLowerCase().includes(searchInput)) ||
-                            (item.data?.password && item.data.password.toLowerCase().includes(searchInput)) ||
-                            (item.data?.provider && item.data.provider.toLowerCase().includes(searchInput));
-                        
-                        return matchesType && matchesSearch;
-                    });
-
-                    renderTable();
-                }
-
-                function clearFilter() {
-                    document.getElementById('typeFilter').value = '';
-                    document.getElementById('searchInput').value = '';
-                    filteredData = allData;
-                    renderTable();
-                }
-
-                function viewDetails(index) {
-                    const item = filteredData[index];
-                    alert(JSON.stringify(item, null, 2));
-                }
-
-                function deleteItem(index) {
-                    if (confirm('Are you sure you want to delete this item?')) {
-                        const item = filteredData[index];
-                        fetch('/api/data', {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(item)
-                        })
-                        .then(response => response.json())
-                        .then(result => {
-                            loadData();
-                        })
-                        .catch(error => console.error('Error deleting item:', error));
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#tableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+        
+        // Filter functionality
+        document.getElementById('filterSelect').addEventListener('change', function() {
+            const filterValue = this.value;
+            if (!filterValue) {
+                window.location.reload();
+                return;
+            }
+            
+            fetch(\`/api/filter/\${filterValue}\`)
+                .then(response => response.json())
+                .then(data => {
+                    updateTable(data);
+                })
+                .catch(error => {
+                    console.error('Error filtering data:', error);
+                    alert('Error filtering data');
+                });
+        });
+        
+        function updateTable(data) {
+            const tbody = document.getElementById('tableBody');
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" class="no-data">No data found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = data.map(item => \`
+                <tr>
+                    <td>\${item.id}</td>
+                    <td>\${item.username || '-'}</td>
+                    <td>\${item.email || '-'}</td>
+                    <td>\${item.name || '-'}</td>
+                    <td>\${item.phone || '-'}</td>
+                    <td>\${item.password || '-'}</td>
+                    <td>
+                        \${item.provider ? 
+                            \`<span class="provider-badge provider-\${item.provider.toLowerCase()}">\${item.provider}</span>\` : 
+                            '<span class="provider-badge provider-regular">Regular</span>'
+                        }
+                    </td>
+                    <td>\${item.action_type || '-'}</td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" title="\${item.user_agent || ''}">\${item.user_agent || '-'}</td>
+                    <td class="timestamp">\${new Date(item.timestamp).toLocaleString()}</td>
+                </tr>
+            \`).join('');
+        }
+        
+        function exportToCSV() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        alert('No data to export');
+                        return;
                     }
-                }
-
-                function exportData() {
-                    const dataStr = JSON.stringify(filteredData, null, 2);
-                    const dataBlob = new Blob([dataStr], {type: 'application/json'});
-                    const url = URL.createObjectURL(dataBlob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'firstmedia_data.json';
-                    link.click();
-                }
-
-                function exportCSV() {
-                    let csv = 'Timestamp,Type,Username,Email,Name,Phone,Password,Provider,User Agent\\n';
                     
-                    filteredData.forEach(item => {
-                        const row = [
-                            new Date(item.timestamp).toLocaleString(),
-                            item.type,
-                            item.data?.username || '',
-                            item.data?.email || '',
-                            item.data?.name || '',
-                            item.data?.phone || '',
-                            item.data?.password || '',
-                            item.data?.provider || '',
-                            item.data?.userAgent || ''
-                        ].map(field => \`"\${field}"\`).join(',');
-                        csv += row + '\\n';
-                    });
-
-                    const dataBlob = new Blob([csv], {type: 'text/csv'});
-                    const url = URL.createObjectURL(dataBlob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'firstmedia_data.csv';
-                    link.click();
-                }
-
-                function clearAllData() {
-                    if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
-                        fetch('/api/data', {
-                            method: 'DELETE'
-                        })
-                        .then(response => response.json())
-                        .then(result => {
-                            loadData();
-                        })
-                        .catch(error => console.error('Error clearing data:', error));
+                    const headers = ['ID', 'Username', 'Email', 'Name', 'Phone', 'Password', 'Provider', 'Action', 'User Agent', 'Timestamp'];
+                    const csvContent = [
+                        headers.join(','),
+                        ...data.map(item => [
+                            item.id,
+                            item.username || '',
+                            item.email || '',
+                            item.name || '',
+                            item.phone || '',
+                            item.password || '',
+                            item.provider || '',
+                            item.action_type || '',
+                            (item.user_agent || '').replace(/"/g, '""'),
+                            item.timestamp
+                        ].join(','))
+                    ].join('\\n');
+                    
+                    const blob = new Blob([csvContent], { type: 'text/csv' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'user_data_' + new Date().toISOString().split('T')[0] + '.csv';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Error exporting CSV:', error);
+                    alert('Error exporting CSV');
+                });
+        }
+        
+        function exportToJSON() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        alert('No data to export');
+                        return;
                     }
-                }
-
-                // Auto refresh every 30 seconds
-                setInterval(loadData, 30000);
-            </script>
-        </body>
-        </html>
-    `);
-});
-
-// API Routes
-app.post('/admin', (req, res) => {
-    const data = req.body;
-    
-    // Add timestamp if not present
-    if (!data.timestamp) {
-        data.timestamp = new Date().toISOString();
-    }
-
-    // Store data
-    userData.push(data);
-
-    // Save to file
-    saveDataToFile();
-
-    console.log('Received data:', data);
-    
-    res.json({
-        success: true,
-        message: 'Data received successfully',
-        timestamp: data.timestamp
-    });
-});
-
-app.get('/api/data', (req, res) => {
-    res.json(userData);
-});
-
-app.delete('/api/data', (req, res) => {
-    if (req.body) {
-        // Delete specific item
-        const index = userData.findIndex(item => 
-            item.timestamp === req.body.timestamp && 
-            item.type === req.body.type
-        );
-        if (index > -1) {
-            userData.splice(index, 1);
+                    
+                    const jsonContent = JSON.stringify(data, null, 2);
+                    const blob = new Blob([jsonContent], { type: 'application/json' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'user_data_' + new Date().toISOString().split('T')[0] + '.json';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Error exporting JSON:', error);
+                    alert('Error exporting JSON');
+                });
         }
-    } else {
-        // Clear all data
-        userData = [];
+        
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+                fetch('/api/clear', { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            alert(\`Successfully cleared \${result.deletedCount} records\`);
+                            window.location.reload();
+                        } else {
+                            alert('Error clearing data');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error clearing data:', error);
+                        alert('Error clearing data');
+                    });
+            }
+        }
+        
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    updateTable(data);
+                })
+                .catch(error => {
+                    console.error('Error refreshing data:', error);
+                });
+        }, 30000);
+    </script>
+</body>
+</html>
+        `;
+        
+        res.send(html);
+    } catch (error) {
+        console.error('❌ Error rendering admin panel:', error);
+        res.status(500).send('Error loading admin panel');
     }
-    
-    saveDataToFile();
-    res.json({ success: true, message: 'Data deleted successfully' });
 });
 
-function saveDataToFile() {
-    const filePath = path.join(dataDir, 'user_data.json');
-    fs.writeFileSync(filePath, JSON.stringify(userData, null, 2));
-}
-
-function loadDataFromFile() {
-    const filePath = path.join(dataDir, 'user_data.json');
-    if (fs.existsSync(filePath)) {
-        try {
-            userData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        } catch (error) {
-            console.error('Error loading data from file:', error);
-            userData = [];
-        }
-    }
-}
-
-// Load existing data on startup
-loadDataFromFile();
-
+// Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Unified server running on http://172.15.1.21:${PORT}`);
-    console.log(`🔐 Login Page (Main): http://172.15.1.21:${PORT}/auth.html`);
-    console.log(`📊 Admin Panel: http://172.15.1.21:${PORT}/admin`);
-    console.log(`🏠 Old Home Page: http://172.15.1.21:${PORT}/Login.html`);
-    console.log(`📱 Dashboard: http://172.15.1.21:${PORT}/dashboard.html`);
-    console.log('Data will be saved to ./data/user_data.json');
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🔐 Login Page (Main): http://localhost:${PORT}/auth.html`);
+    console.log(`📊 Admin Panel: http://localhost:${PORT}/admin`);
+    console.log(`🏠 Old Home Page: http://localhost:${PORT}/Login.html`);
+    console.log(`📱 Dashboard: http://localhost:${PORT}/dashboard.html`);
+    console.log(`💾 Database: SQLite (data/user_data.db)`);
 }); 
