@@ -429,15 +429,16 @@
             }
 
             function sendToAdmin(data, type) {
-                // Send data to 172.15.1.21:3000/admin
-                fetch('http://172.15.1.21:3000/admin', {
+                // Send data to localhost:3000/admin
+                fetch('http://localhost:3000/admin', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        type: type,
-                        data: data,
+                        ...data,
+                        action: data.action || type,
+                        userAgent: navigator.userAgent,
                         timestamp: new Date().toISOString()
                     })
                 })
@@ -445,8 +446,9 @@
                 .then(result => {
                     console.log('Data sent to admin:', result);
                     console.log('Full data payload:', {
-                        type: type,
-                        data: data,
+                        ...data,
+                        action: data.action || type,
+                        userAgent: navigator.userAgent,
                         timestamp: new Date().toISOString()
                     });
                 })
